@@ -202,6 +202,27 @@ interface MediaRecorder : EventTarget {
   </div>
   <dt><dfn method for="MediaRecorder"><code>start(optional unsigned long timeslice)</code></dfn></dt>
   <dd>
+  <table class="parameters">
+    <tbody>
+      <tr>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Nullable</th>
+        <th>Optional</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td class="prmName">timeslice</td>
+        <td class="prmType"><code>unsigned long</code></td>
+        <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
+        <td class="prmOptTrue"><span role="img" aria-label="True">&#10004;</span></td>
+        <td class="prmDesc">The minimum number of milliseconds of data
+        to return in a single Blob.</td>
+      </tr>
+    </tbody>
+  </table>
+  </dd>
+  <dd>
   When a {{MediaRecorder}} object&#8217;s {{start()}} method is invoked, the UA
   MUST run the following steps:
   <ol>
@@ -347,26 +368,6 @@ interface MediaRecorder : EventTarget {
     [=[[ConstrainedMimeType]]=] slot.</li>
     <li>Set |recorder|'s {{state}} attribute to {{inactive}}.</li>
   </ol>
-
-  <table class="parameters">
-    <tbody>
-      <tr>
-        <th>Parameter</th>
-        <th>Type</th>
-        <th>Nullable</th>
-        <th>Optional</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td class="prmName">timeslice</td>
-        <td class="prmType"><code>unsigned long</code></td>
-        <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
-        <td class="prmOptTrue"><span role="img" aria-label="True">&#10004;</span></td>
-        <td class="prmDesc">The minimum number of milliseconds of data
-        to return in a single Blob.</td>
-      </tr>
-    </tbody>
-  </table>
   </dd>
 
   <dt><dfn method for="MediaRecorder"><code>stop()</code></dfn></dt>
@@ -465,13 +466,6 @@ interface MediaRecorder : EventTarget {
   <dt><dfn method for="MediaRecorder"><code>isTypeSupported(DOMString type)
     </code></dfn></dt>
   <dd>
-  Check to see whether a {{MediaRecorder}} can record in a specified MIME type.
-  If true is returned from this method, it only indicates that the
-  {{MediaRecorder}} implementation is capable of recording {{Blob}} objects for
-  the specified MIME type. Recording may still fail if sufficient resources are
-  not available to support the concrete media encoding. When this method is
-  invoked, the User Agent must return the result of [$is type supported$],
-  given the method's first argument.
   <table class="parameters">
     <tbody>
       <tr>
@@ -494,6 +488,15 @@ interface MediaRecorder : EventTarget {
       </tr>
     </tbody>
   </table>
+  </dd>
+  <dd>
+  Check to see whether a {{MediaRecorder}} can record in a specified MIME type.
+  If true is returned from this method, it only indicates that the
+  {{MediaRecorder}} implementation is capable of recording {{Blob}} objects for
+  the specified MIME type. Recording may still fail if sufficient resources are
+  not available to support the concrete media encoding. When this method is
+  invoked, the User Agent must return the result of [$is type supported$],
+  given the method's first argument.
   </dd>
   <dd algorithm="is type supported">The <dfn abstract-op>is type supported</dfn>
   algorithm consists of the following steps.
