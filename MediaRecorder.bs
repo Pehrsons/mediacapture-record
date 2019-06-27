@@ -399,18 +399,21 @@ interface MediaRecorder : EventTarget {
   When a {{MediaRecorder}} object&#8217;s {{pause()}} method is invoked, the UA
   MUST run the following steps:
   <ol>
-    <li>If {{state}} is {{inactive}}, throw an {{InvalidStateError}}
-    {{DOMException}} and abort these steps.</li>
+    <li>Let |recorder| be the {{MediaRecorder}} object on which the method was
+    invoked.</li>
 
-    <li>If {{state}} is {{paused}}, abort these steps.</li>
+    <li>If the value of |recorder|'s {{state}} attribute is {{inactive}}, throw
+    an {{InvalidStateError}} {{DOMException}} and abort these steps.</li>
 
-    <li>Set {{state}} to {{paused}}, and queue a
-    task, using the DOM manipulation task source, that runs the following steps:
+    <li>If the value of |recorder|'s {{state}} attribute is {{paused}}, abort
+    these steps.</li>
+
+    <li>Set |recorder|'s {{state}} attribute to {{paused}}, and queue a task,
+    using the DOM manipulation task source, that runs the following steps:
     <ol>
       <li>Stop gathering data into <var>blob</var> (but keep it
       available so that recording can be resumed in the future).</li>
-      <li>Let <var>target</var> be the MediaRecorder context object.
-      <a>Fire an event</a> named <a>pause</a> at <var>target</var>.</li>
+      <li><a>Fire an event</a> named <a>pause</a> at <var>recording</var>.</li>
     </ol>
     </li>
     <li>return <code>undefined</code>.</li>
@@ -422,18 +425,21 @@ interface MediaRecorder : EventTarget {
   When a {{MediaRecorder}} object&#8217;s {{resume()}} method is invoked, the
   UA MUST run the following steps:
   <ol>
-    <li>If {{state}} is {{inactive}}, throw an {{InvalidStateError}}
-    {{DOMException}} and abort these steps.</li>
+    <li>Let |recorder| be the {{MediaRecorder}} object on which the method was
+    invoked.</li>
 
-    <li>If {{state}} is {{recording}}, abort these steps.</li>
+    <li>If the value of |recorder|'s {{state}} attribute is {{inactive}}, throw
+    an {{InvalidStateError}} {{DOMException}} and abort these steps.</li>
 
-    <li>Set {{state}} to {{recording}}, and queue a
-    task, using the DOM manipulation task source, that runs the following steps:
+    <li>If the value of |recorder|'s {{state}} attribute is {{recording}}, abort
+    these steps.</li>
+
+    <li>Set |recorder|'s {{state}} attribute to {{recording}}, and queue a task,
+    using the DOM manipulation task source, that runs the following steps:
     <ol>
       <li>Resume (or continue) gathering data into the current <var>blob</var>.
       </li>
-      <li>Let <var>target</var> be the MediaRecorder context object. <a>Fire
-      an event</a> named <a>resume</a> at <var>target</var>.</li>
+      <li><a>Fire an event</a> named <a>resume</a> at <var>recorder</var>.</li>
     </ol>
     </li>
     <li>return <code>undefined</code>.</li>
@@ -445,14 +451,17 @@ interface MediaRecorder : EventTarget {
   When a {{MediaRecorder}} object&#8217;s {{requestData()}} method is invoked,
   the UA MUST run the following steps:
   <ol>
-    <li>If {{state}} is {{inactive}} throw an {{InvalidStateError}}
-    {{DOMException}} and terminate these steps. Otherwise the UA MUST queue a
-    task, using the DOM manipulation task source, that runs the following steps:
+    <li>Let |recorder| be the {{MediaRecorder}} object on which the method was
+    invoked.</li>
+
+    <li>If the value of |recorder|'s {{state}} attribute is {{inactive}} throw
+    an {{InvalidStateError}} {{DOMException}} and abort these steps. Otherwise
+    the UA MUST queue a task, using the DOM manipulation task source, that runs
+    the following steps:
     <ol>
-      <li>Let <var>blob</var> be the {{Blob}} of collected data so far and
-      let <var>target</var> be the {{MediaRecorder}} context object, then
+      <li>Let <var>blob</var> be the {{Blob}} of collected data so far, and
       <a href="#to-fire-a-blob-event">fire a blob event</a> named
-      <a>dataavailable</a> at <var>target</var> with <var>blob</var>.
+      <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.
       (Note that <var>blob</var> will be empty if no data has been gathered
       yet.)</li>
 
