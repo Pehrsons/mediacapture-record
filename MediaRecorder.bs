@@ -116,7 +116,7 @@ interface MediaRecorder : EventTarget {
     </tbody>
   </table>
   </dd>
-  <dd>When the {{MediaRecorder()}}
+  <dd algorithm="to construct a MediaRecorder">When the {{MediaRecorder()}}
   constructor is invoked, the User Agent MUST run the following steps:
   <ol>
     <li>Let |stream| be the constructor's first argument.</li>
@@ -222,7 +222,7 @@ interface MediaRecorder : EventTarget {
     </tbody>
   </table>
   </dd>
-  <dd>
+  <dd algorithm="to start a MediaRecorder">
   When a {{MediaRecorder}} object&#8217;s {{start()}} method is invoked, the UA
   MUST run the following steps:
   <ol>
@@ -347,7 +347,9 @@ interface MediaRecorder : EventTarget {
     </ol>
     </li>
   </ol>
+  </dd>
 
+  <dd>
   <p>Note that {{stop()}}, {{requestData()}}, and {{pause()}} also affect the
   recording behavior.</p>
 
@@ -360,9 +362,11 @@ interface MediaRecorder : EventTarget {
   <p> If any Track within the {{MediaStream}} is {{muted}} or not {{enabled}} at
   any time, the UA will only record black frames or silence since that is the
   content produced by the Track.</p>
+  </dd>
 
-  <p>The <dfn abstract-op>Inactivate the recorder</dfn> algorithm given a
-  |recorder|, is as follows:</p>
+  <dd algorithm="to inactivate the MediaRecorder">
+  <p>The <dfn abstract-op>Inactivate
+  the recorder</dfn> algorithm given a |recorder|, is as follows:</p>
   <ol>
     <li>Set |recorder|'s {{mimeType}} attribute to the value of the
     [=[[ConstrainedMimeType]]=] slot.</li>
@@ -371,7 +375,7 @@ interface MediaRecorder : EventTarget {
   </dd>
 
   <dt><dfn method for="MediaRecorder"><code>stop()</code></dfn></dt>
-  <dd>
+  <dd algorithm="to stop a MediaRecorder">
   When a {{MediaRecorder}} object&#8217;s {{stop()}} method is invoked, the UA
   MUST run the following steps:
   <ol>
@@ -395,7 +399,7 @@ interface MediaRecorder : EventTarget {
   </dd>
 
   <dt><dfn method for="MediaRecorder"><code>pause()</code></dfn></dt>
-  <dd>
+  <dd algorithm="to pause a MediaRecorder">
   When a {{MediaRecorder}} object&#8217;s {{pause()}} method is invoked, the UA
   MUST run the following steps:
   <ol>
@@ -421,7 +425,7 @@ interface MediaRecorder : EventTarget {
   </dd>
 
   <dt><dfn method for="MediaRecorder"><code>resume()</code></dfn></dt>
-  <dd>
+  <dd algorithm="to resume a MediaRecorder">
   When a {{MediaRecorder}} object&#8217;s {{resume()}} method is invoked, the
   UA MUST run the following steps:
   <ol>
@@ -447,7 +451,7 @@ interface MediaRecorder : EventTarget {
   </dd>
 
   <dt><dfn method for="MediaRecorder"><code>requestData()</code></dfn></dt>
-  <dd>
+  <dd algorithm="to request data from a MediaRecorder">
   When a {{MediaRecorder}} object&#8217;s {{requestData()}} method is invoked,
   the UA MUST run the following steps:
   <ol>
